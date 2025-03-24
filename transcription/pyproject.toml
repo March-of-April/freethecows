@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "cow"
+version = "0.1.0"
+description = ""
+authors = ["redsalt <auomou.gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+llvmlite = "^0.44.0"
+numba = "^0.61.0"
+openai-whisper = {git = "https://github.com/openai/whisper.git"}
+transformers = "^4.49.0"
+torch = "^2.6.0"
+jupyter = "^1.1.1"
+ipywidgets = "^8.1.5"
+pandas = "^2.2.3"
+joblib = "^1.4.2"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
