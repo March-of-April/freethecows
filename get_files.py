@@ -117,9 +117,10 @@ def create_dataframe_from_list(data):
     """
     rows = []
     for item in data:
-        text = item['text']
+        data = item['data']
+        text = data['text']
         timestamp = []
-        for chunk in item['chunks']:
+        for chunk in data['chunks']:
             timestamp_start, timestamp_end = chunk['timestamp']
             chunk_text = chunk['text']
             # rows.append({
@@ -132,9 +133,10 @@ def create_dataframe_from_list(data):
                 f"{timestamp_start} - {timestamp_end}: {chunk_text}"
             )
         rows.append({
+                'file': item['file'],
                 'text': text,
                 'timestamp': ', '.join(timestamp)
         })
-    return pd.DataFrame(rows, columns=['text', 'timestamp'])
+    return pd.DataFrame(rows, columns=['file', 'text', 'timestamp'])
     # return rows
 
