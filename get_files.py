@@ -79,7 +79,7 @@ def get_files_grouped_by_first_subdirectory(directory, extensions):
         extensions (list): A list of file extensions (e.g., ['.txt', '.pdf']).
 
     Returns:
-        dict: A dictionary where keys are first-level subdirectory names and values are lists of file paths.
+        dict: A dictionary where keys are first-level subdirectory names (sorted in decreasing order) and values are lists of file paths (sorted in increasing order).
     """
     grouped_files = {}
     for root, _, files in os.walk(directory):
@@ -99,8 +99,16 @@ def get_files_grouped_by_first_subdirectory(directory, extensions):
                 grouped_files[first_subdir] = []
             grouped_files[first_subdir].extend(filtered_files)
 
-    # Return a sorted dictionary by first-level subdirectory names
-    return dict(sorted(grouped_files.items()))
+    # Sort the files in each directory in increasing order
+    for key in grouped_files:
+        grouped_files[key] = sorted(grouped_files[key])
+
+    # Sort the directory keys in decreasing order
+    sorted_grouped_files = {
+        k: grouped_files[k] for k in sorted(grouped_files.keys(), reverse=True)
+    }
+
+    return sorted_grouped_files
 
 
 import pandas as pd
